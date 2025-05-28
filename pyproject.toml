@@ -1,0 +1,15 @@
+[project]
+name = "dsnd-dashboard-project"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "flake8>=7.2.0",
+    "ipython>=9.2.0",
+    "matplotlib==3.9.2",
+    "numpy==2.1.2",
+    "pandas==2.2.3",
+    "pytest>=8.3.5",
+    "python-fasthtml==0.8.0",
+    "scikit-learn==1.5.2",
+    "scipy==1.14.1",
+]
