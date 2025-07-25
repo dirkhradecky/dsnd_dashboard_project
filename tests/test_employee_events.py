@@ -53,6 +53,7 @@ def test_employee_table_exists(table_names):
     # Assert that the string 'employee'
     # is in the table_names list
     #### YOUR CODE HERE
+    assert 'employee' in table_names, "Table 'employee' does not exist in the database"
     
 
 # Define a test function called
