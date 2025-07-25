@@ -78,6 +78,6 @@ def test_employee_events_table_exists(table_names):
 
     # Assert that the string 'employee_events'
     # is in the table_names list
-    #### YOUR CODE HERE
+    #### YOUR CODE HERE 
     assert 'employee_events' in table_names, "Table 'employee_events' does not exist in the database"
 
