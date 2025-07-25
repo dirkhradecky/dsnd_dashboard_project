@@ -3,9 +3,11 @@ import matplotlib.pyplot as plt
 
 # Import QueryBase, Employee, Team from employee_events
 #### YOUR CODE HERE
+from employee_events import QueryBase, Employee, Team
 
 # import the load_model function from the utils.py file
 #### YOUR CODE HERE
+from utils import load_model
 
 """
 Below, we import the parent classes
@@ -25,57 +27,69 @@ from combined_components import FormGroup, CombinedComponent
 # Create a subclass of base_components/dropdown
 # called `ReportDropdown`
 #### YOUR CODE HERE
+class ReportDropdown(Dropdown):
     
     # Overwrite the build_component method
     # ensuring it has the same parameters
     # as the Report parent class's method
     #### YOUR CODE HERE
+    def build_component(self, entity_id, model):
         #  Set the `label` attribute so it is set
         #  to the `name` attribute for the model
         #### YOUR CODE HERE
+        self.label = model.name
         
         # Return the output from the
         # parent class's build_component method
         #### YOUR CODE HERE
+        return super().build_component(entity_id, model)
     
     # Overwrite the `component_data` method
     # Ensure the method uses the same parameters
     # as the parent class method
     #### YOUR CODE HERE
+    def component_data(self, entity_id, model):
         # Using the model argument
         # call the employee_events method
         # that returns the user-type's
         # names and ids
+        return model.names()
 
 
 # Create a subclass of base_components/BaseComponent
 # called `Header`
 #### YOUR CODE HERE
+class Header(BaseComponent):
 
     # Overwrite the `build_component` method
     # Ensure the method has the same parameters
     # as the parent class
     #### YOUR CODE HERE
+    def build_component(self, entity_id, model):
         
         # Using the model argument for this method
         # return a fasthtml H1 objects
         # containing the model's name attribute
         #### YOUR CODE HERE
+        return H1(model.name)
           
 
 # Create a subclass of base_components/MatplotlibViz
 # called `LineChart`
 #### YOUR CODE HERE
+class LineChart(MatplotlibViz):
     
     # Overwrite the parent class's `visualization`
     # method. Use the same parameters as the parent
     #### YOUR CODE HERE
+    def visualization(self, entity_id, model):
     
 
         # Pass the `asset_id` argument to
         # the model's `event_counts` method to
         # receive the x (Day) and y (event count)
         #### YOUR CODE HERE
+        
         
         # Use the pandas .fillna method to fill nulls with 0
         #### YOUR CODE HERE
