@@ -89,35 +89,42 @@ class LineChart(MatplotlibViz):
         # the model's `event_counts` method to
         # receive the x (Day) and y (event count)
         #### YOUR CODE HERE
+        df = model.event_counts(entity_id)
         
         
         # Use the pandas .fillna method to fill nulls with 0
         #### YOUR CODE HERE
+        df = df.fillna(0)
         
         # User the pandas .set_index method to set
         # the date column as the index
         #### YOUR CODE HERE
+        df = df.set_index('event_date')
         
         # Sort the index
         #### YOUR CODE HERE
+        df = df.sort_index()
         
         # Use the .cumsum method to change the data
         # in the dataframe to cumulative counts
         #### YOUR CODE HERE
-        
+        df = df.cumsum()
         
         # Set the dataframe columns to the list
         # ['Positive', 'Negative']
         #### YOUR CODE HERE
+        df.columns = ['Positive', 'Negative']
         
         # Initialize a pandas subplot
         # and assign the figure and axis
         # to variables
         #### YOUR CODE HERE
+        fig, ax = plt.subplots(figsize=(10, 6))
         
         # call the .plot method for the
         # cumulative counts dataframe
         #### YOUR CODE HERE
+        df.plot(ax=ax)
         
         # pass the axis variable
         # to the `.set_axis_styling`
@@ -127,37 +134,48 @@ class LineChart(MatplotlibViz):
         # Reference the base_components/matplotlib_viz file 
         # to inspect the supported keyword arguments
         #### YOUR CODE HERE
+        self.set_axis_styling(ax, border_color='black', font_color='black')
         
         # Set title and labels for x and y axis
         #### YOUR CODE HERE
+        ax.set_title('Cumulative Event Counts', fontsize=20)
+        ax.set_xlabel('Date', fontsize=14)
+        ax.set_ylabel('Cumulative Count', fontsize=14)
+        return fig
 
 
 # Create a subclass of base_components/MatplotlibViz
 # called `BarChart`
 #### YOUR CODE HERE
+class BarChart(MatplotlibViz):
 
     # Create a `predictor` class attribute
     # assign the attribute to the output
     # of the `load_model` utils function
     #### YOUR CODE HERE
+    predictor = load_model()
 
     # Overwrite the parent class `visualization` method
     # Use the same parameters as the parent
     #### YOUR CODE HERE
+    def visualization(self, entity_id, model):
 
         # Using the model and asset_id arguments
         # pass the `asset_id` to the `.model_data` method
         # to receive the data that can be passed to the machine
         # learning model
         #### YOUR CODE HERE
+        data = model.model_data(entity_id)
         
         # Using the predictor class attribute
         # pass the data to the `predict_proba` method
         #### YOUR CODE HERE
+        predicted_proba = self.predictor.predict_proba(data)
         
         # Index the second column of predict_proba output
         # The shape should be (<number of records>, 1)
         #### YOUR CODE HERE
+        predicted_proba = predicted_proba[:, 1]
         
         
         # Below, create a `pred` variable set to
@@ -166,13 +184,18 @@ class LineChart(MatplotlibViz):
         # If the model's name attribute is "team"
         # We want to visualize the mean of the predict_proba output
         #### YOUR CODE HERE
+        if model.name == 'team':
+            pred = predicted_proba.mean()
             
         # Otherwise set `pred` to the first value
         # of the predict_proba output
         #### YOUR CODE HERE
+        else:
+            pred = predicted_proba[0]
         
         # Initialize a matplotlib subplot
         #### YOUR CODE HERE
+        fig, ax = plt.subplots(figsize=(10, 6))
         
         # Run the following code unchanged
         ax.barh([''], [pred])
@@ -183,6 +206,8 @@ class LineChart(MatplotlibViz):
         # to the `.set_axis_styling`
         # method
         #### YOUR CODE HERE
+        self.set_axis_styling(ax, border_color='black', font_color='black')
+        return fig
  
 # Create a subclass of combined_components/CombinedComponent
 # called Visualizations       
