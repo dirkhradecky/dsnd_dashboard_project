@@ -79,3 +79,12 @@ erDiagram
   employee ||--o{ employee_events : "employee_id"
   notes }o--o{ employee_events : ""
 ```
+
+### How to run the dashboard locally
+
+- clone the github repository: https://github.com/dirkhradecky/dsnd_dashboard_project
+- Install the dependencies (pip install -r requirements.txt)
+- Run the file dashboard.py to start the app
+- in your browser go to the site http://localhost:5001
+- Then the app will start:
+  ![alt text](image.png)
